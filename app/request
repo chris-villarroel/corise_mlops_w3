@@ -1,0 +1,9 @@
+2022-07-31 18:54:16.201 | INFO     | server:shutdown_event:179 - Shutting down application
+2022-07-31 18:55:16.538 | INFO     | server:shutdown_event:179 - Shutting down application
+2022-07-31 18:55:16.538 | INFO     | server:shutdown_event:179 - Shutting down application
+2022-07-31 18:55:16.538 | INFO     | server:shutdown_event:179 - Shutting down application
+2022-07-31 18:55:54.198 | INFO     | server:shutdown_event:179 - Shutting down application
+2022-07-31 18:56:33.773 | INFO     | server:shutdown_event:179 - Shutting down application
+2022-07-31 18:56:52.438 | INFO     | server:predict:211 - Shutting down application
+2022-07-31 18:57:05.201 | INFO     | server:predict:211 - Shutting down application
+2022-07-31 18:58:33.983 | INFO     | server:predict:211 - Shutting down application

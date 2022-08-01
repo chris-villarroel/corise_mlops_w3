@@ -256,3 +256,36 @@ This part is optional. We've built our web application, and containerized it wit
   
   3. Head over to `test_app.py` to get started. As you develop the tests using prompts in this file, you can run `pytest` to run the tests.
 
+# RESULTADOS
+
+2022-08-01 00:22:03.878 | INFO     | server:predict:198 - timestamp
+2022-08-01 00:22:03.878 | INFO     | server:predict:199 - request
+2022-08-01 00:22:03.878 | DEBUG    | server:predict:200 - Computer glitches which led to chaos for HSBC customers on Monday are fixed, the High Street bank confirms.
+2022-08-01 00:22:03.878 | INFO     | server:predict:201 - latency
+2022-08-01 00:22:04.958 | INFO     | server:predict:205 - prediciton
+2022-08-01 00:22:04.959 | DEBUG    | server:predict:206 - Sci/Tech
+2022-08-01 00:22:24.222 | INFO     | server:predict:198 - timestamp
+2022-08-01 00:22:24.222 | INFO     | server:predict:199 - request
+2022-08-01 00:22:24.222 | DEBUG    | server:predict:200 - Bill Belichick won't have to worry about Charlie Weis raiding his coaching staff for Notre Dame. But we'll have to see whether new Miami Dolphins coach Nick Saban has an eye on any of his former assistants.
+2022-08-01 00:22:24.223 | INFO     | server:predict:201 - latency
+2022-08-01 00:22:25.175 | INFO     | server:predict:205 - prediciton
+2022-08-01 00:22:25.176 | DEBUG    | server:predict:206 - Sports
+2022-08-01 00:22:34.627 | INFO     | server:predict:198 - timestamp
+2022-08-01 00:22:34.628 | INFO     | server:predict:199 - request
+2022-08-01 00:22:34.628 | DEBUG    | server:predict:200 - Richard Scrushy once sat down to talk with 60 Minutes correspondent Mike Wallace about allegations that Scrushy started a huge fraud while chief executive of rehabilitation giant HealthSouth Corp. Now, Scrushy wants Wallace to do the talking.
+2022-08-01 00:22:34.628 | INFO     | server:predict:201 - latency
+2022-08-01 00:22:35.532 | INFO     | server:predict:205 - prediciton
+2022-08-01 00:22:35.532 | DEBUG    | server:predict:206 - Entertainment
+2022-08-01 00:22:41.735 | INFO     | server:predict:198 - timestamp
+2022-08-01 00:22:41.735 | INFO     | server:predict:199 - request
+2022-08-01 00:22:41.735 | DEBUG    | server:predict:200 - LIMA, Peru (Reuters) - Peruvian authorities arrested a former army major who led a three-day uprising in a southern  Andean town and will storm the police station where some of his  200 supporters remain unless they surrender soon, Prime  Minister Carlos Ferrero said on Tuesday.
+2022-08-01 00:22:41.735 | INFO     | server:predict:201 - latency
+2022-08-01 00:22:42.620 | INFO     | server:predict:205 - prediciton
+2022-08-01 00:22:42.621 | DEBUG    | server:predict:206 - Entertainment
+2022-08-01 00:22:49.348 | INFO     | server:predict:198 - timestamp
+2022-08-01 00:22:49.348 | INFO     | server:predict:199 - request
+2022-08-01 00:22:49.348 | DEBUG    | server:predict:200 - With power forward Etan Thomas having missed the entire season, reserve forward Michael Ruffin has done well in taking his place.
+2022-08-01 00:22:49.348 | INFO     | server:predict:201 - latency
+2022-08-01 00:22:50.183 | INFO     | server:predict:205 - prediciton
+2022-08-01 00:22:50.183 | DEBUG    | server:predict:206 - Sports
+

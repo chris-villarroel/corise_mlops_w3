@@ -14,7 +14,7 @@ GLOBAL_CONFIG = {
             "sentence_transformer_embedding_dim": 768
         },
         "classifier": {
-            "serialized_model_path": "./data/news_classifier.joblib"
+            "serialized_model_path": "../data/news_classifier.joblib"
         }
     },
     "service": {
@@ -50,6 +50,39 @@ class TransformerFeaturizer(BaseEstimator, TransformerMixin):
             X_t.append(self.sentence_transformer_model.encode(doc))
         return X_t
 
+#CHECK
+
+# predictor = NewsCategoryClassifier(config=GLOBAL_CONFIG) #predicto es self
+
+# texto_dic = {
+#   "source": "cnn",
+#   "url": "cnn.com",
+#   "title": "dead person",
+#   "description": "the patriarch of a family of world famous jazz musicians, including grandson Wynton Marsalis, has died."
+# }
+
+# predictor.predict_label(texto_dic)
+
+# a[0]
+
+
+# predictor.pipeline.predict(['AP - Ellis L. Marsalis Sr., the patriarch of a family of world famous jazz musicians, including grandson Wynton Marsalis, has died. He was 96.'])
+# pred= predictor.pipeline.predict_proba(['AP - Ellis L. Marsalis Sr., the patriarch of a family of world famous jazz musicians, including grandson Wynton Marsalis, has died. He was 96.'])
+
+# LABEL_SET = [
+#     'Business',
+#     'Sci/Tech',
+#     'Software and Developement',
+#     'Entertainment',
+#     'Sports',
+#     'Health',
+#     'Toons',
+#     'Music Feeds'
+# ]
+
+# res = dict(zip(LABEL_SET, pred[0]))
+
+
 
 class NewsCategoryClassifier:
     def __init__(self, config: dict) -> None:
@@ -59,8 +92,9 @@ class NewsCategoryClassifier:
         1. Load the sentence transformer model and initialize the `featurizer` of type `TransformerFeaturizer` (Hint: revisit Week 1 Step 4)
         2. Load the serialized model as defined in GLOBAL_CONFIG['model'] into memory and initialize `model`
         """
-        featurizer = None
-        model = None
+        featurizer = TransformerFeaturizer(self.config['model']['featurizer']['sentence_transformer_embedding_dim'],
+                                           SentenceTransformer(self.config['model']['featurizer']['sentence_transformer_model']))
+        model = joblib.load(self.config['model']['classifier']['serialized_model_path'])
         self.pipeline = Pipeline([
             ('transformer_featurizer', featurizer),
             ('classifier', model)
@@ -80,7 +114,23 @@ class NewsCategoryClassifier:
             ...
         }
         """
-        return {}
+        pred= self.pipeline.predict_proba(model_input)
+
+        LABEL_SET = [
+            'Business',
+            'Sci/Tech',
+            'Software and Developement',
+            'Entertainment',
+            'Sports',
+            'Health',
+            'Toons',
+            'Music Feeds'
+        ]
+
+        res = dict(zip(LABEL_SET, pred[0]))
+
+
+        return res
 
     def predict_label(self, model_input: dict) -> str:
         """
@@ -90,8 +140,10 @@ class NewsCategoryClassifier:
         model prediction label
 
         Output format: predicted label for the model input
-        """
-        return ""
+       """
+        texto = [model_input['description']]
+        pred = self.pipeline.predict(texto)
+        return pred[0]
 
 
 app = FastAPI()
@@ -106,6 +158,10 @@ def startup_event():
         Access to the model instance and log file will be needed in /predict endpoint, make sure you
         store them as global variables
     """
+
+    #predictor = NewsCategoryClassifier(config=GLOBAL_CONFIG)
+
+    logger.add(GLOBAL_CONFIG['service']['log_destination'])
     logger.info("Setup completed")
 
 
@@ -118,9 +174,11 @@ def shutdown_event():
         2. Any other cleanups
     """
     logger.info("Shutting down application")
+    logger.remove()
 
 
-@app.post("/predict", response_model=PredictResponse)
+
+@app.post("/predict", response_model=str)
 def predict(request: PredictRequest):
     # get model prediction for the input request
     # construct the data to be logged
@@ -137,9 +195,19 @@ def predict(request: PredictRequest):
         }
         3. Construct an instance of `PredictResponse` and return
     """
-    return {}
+    logger.info('timestamp')
+    logger.info('request')
+    logger.debug(request.description)
+    logger.info('latency')
+    predictor = NewsCategoryClassifier(config=GLOBAL_CONFIG)
+    request_dic = {'description' : request.description}
+    respuesta = predictor.predict_label(request_dic)
+    logger.info('prediciton')
+    logger.debug(respuesta)
+
+    return respuesta
 
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"Hello": "World2"}
